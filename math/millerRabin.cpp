@@ -32,28 +32,3 @@ bool isPrime(ll n){
 		if(!check(w, d, n, s)) return false;
 	return true;
 }
-
-ll f(ll x, ll c, ll mod){
-	return (mul(x,x,mod) + c)%mod;
-}
-
-ll rho(ll n){
-	if(isPrime(n)) return n;
-	ll x0 = (rand()%(n-1)) + 1;
-	ll c = (rand()%(n-1))+1;
-	ll turt = f(x0, c, n);
-	ll rabit = f(turt, c, n);
-	while(1){
-		ll diff = abs(turt-rabit);
-		ll g = __gcd(diff, n);
-
-		turt = f(turt, c, n);
-		rabit = f(rabit, c, n);
-		rabit = f(rabit, c, n);
-		if(g==n) return rho(n);
-		if(g==1) continue;
-		return g;
-	}
-	return n;
-}
-
