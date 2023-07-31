@@ -28,7 +28,7 @@ ll binPow(ll base, ll ex, ll mod){
 	return ans;
 }
 bool check(ll a, ll d, ll n, int s){
-	ll x = bPow(a, d, n);
+	ll x = binPow(a, d, n);
 	if(x == 1 || x == n-1) return true;
 	for(int r=0;r<s;r++){
 		x = mul(x, x, n);
