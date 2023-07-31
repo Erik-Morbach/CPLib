@@ -59,8 +59,8 @@ ll brent(ll n){
 	if(isPrime(n)) return n;
 	for(int w: {2,3,5,7,11,13,17,19})
 		if(n%w==0) return w;
-	ll x0 = (ra()%(n-1)) + 1;
-	ll c = (ra()%(n-1))+1;
+	ll x0 = (rnd()%(n-1)) + 1;
+	ll c = (rnd()%(n-1))+1;
 	ll turt = x0;
 	ll rabit = f(turt, c, n);
 	ll g = 1;
