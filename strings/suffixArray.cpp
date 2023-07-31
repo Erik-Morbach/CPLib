@@ -8,11 +8,10 @@ vi makeSa(const string &s){
 	}
 	for(int k=0;k<n;k=(k?k*2:k+1)){
 		vi cnt(N,0);
-		vi nsa(sa), nra(ra);
- 
+		vi nsa(sa), nra(n);
 		for(int i=0;i<n;i++){
 			nsa[i] = (nsa[i] - k + n)%n;
-			cnt[ra[nsa[i]]]++;
+			cnt[ra[i]]++;
 		}
 		for(int i=1;i<N;i++) cnt[i] += cnt[i-1];
 		for(int i=n-1;i>=0;i--) sa[--cnt[ra[nsa[i]]]] = nsa[i];
@@ -20,13 +19,10 @@ vi makeSa(const string &s){
 		int r = 0;
 		nra[sa[0]] = r;
 		for(int i=1;i<n;i++){
-			ii curr = {ra[sa[i]], ra[(sa[i]+k)%n]};
-			ii prev = {ra[sa[i-1]],ra[(sa[i-1]+k)%n]};
-			if(curr!=prev) r++;
-			nra[sa[i]] = r;
+			nra[sa[i]] = r += ra[sa[i]] != ra[sa[i-1]] or ra[(sa[i]+k)%n] != ra[(sa[i-1]+k)%n];
 		}
+		ra = nra;
 		if(nra[sa[n-1]]==n-1) break;
-		swap(nra,ra);
 	}
 	return sa;
 }
