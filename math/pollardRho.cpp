@@ -61,15 +61,15 @@ ll rho(ll n) {
 		if(n%w==0) return w;
 	ll x0 = (rnd()%(n-2)) + 2;
 	ll c = (rnd()%(n-1)) + 1;
-    ll x = x0;
-    ll y = x0;
-    ll g = 1;
-    while (g == 1) {
-        x = f(x, c, n);
-        y = f(y, c, n);
-        y = f(y, c, n);
-        g = __gcd(abs(x - y), n);
+	ll x = x0;
+	ll y = x0;
+	ll g = 1;
+	while (g == 1) {
+		x = f(x, c, n);
+		y = f(y, c, n);
+		y = f(y, c, n);
+		g = __gcd(abs(x - y), n);
 		if(g == n) return rho(n);
-    }
-    return g;
+	}
+	return g;
 }

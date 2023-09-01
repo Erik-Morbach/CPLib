@@ -1,4 +1,3 @@
-// TODO: Verificar esse código
 template<int maxp, int maxn>
 struct dSparse{
 	int n;
