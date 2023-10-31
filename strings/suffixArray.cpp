@@ -6,11 +6,12 @@ vi makeSa(const string &s){
 		sa[i] = i;
 		ra[i] = s[i];
 	}
+	vi cnt(N,0);
+	vi nsa(sa), nra(n);
 	for(int k=0;k<n;k=(k?k*2:k+1)){
-		vi cnt(N,0);
-		vi nsa(sa), nra(n);
+		fill(all(cnt), 0);
 		for(int i=0;i<n;i++){
-			nsa[i] = (nsa[i] - k + n)%n;
+			nsa[i] = (sa[i] - k + n)%n;
 			cnt[ra[i]]++;
 		}
 		for(int i=1;i<N;i++) cnt[i] += cnt[i-1];
@@ -21,12 +22,12 @@ vi makeSa(const string &s){
 		for(int i=1;i<n;i++){
 			nra[sa[i]] = r += ra[sa[i]] != ra[sa[i-1]] or ra[(sa[i]+k)%n] != ra[(sa[i-1]+k)%n];
 		}
-		ra = nra;
-		if(nra[sa[n-1]]==n-1) break;
+		swap(nra, ra);
+		if(ra[sa[n-1]]==n-1) break;
 	}
 	return sa;
 }
- 
+
 vi kasai(const string &s, const vi &sa){
 	int n = s.size();
 	vi lcp(n,0), ra(n);
