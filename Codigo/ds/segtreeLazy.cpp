@@ -1,4 +1,60 @@
-// TODO: Verificar
+
+struct Nodes{
+	ll value;
+	ll lazy;
+	int ini, fim;
+}nodes[maxn];
+
+struct Seg{
+	void build(int ini, int fim, int idx=1){
+		nodes[idx].ini = ini;
+		nodes[idx].fim = fim;
+		nodes[idx].lazy = 0;
+		if(ini == fim){
+			nodes[idx].value = 0;
+			return;
+		}
+		int m = (ini + fim)/2;
+		build(ini, m, idx*2);
+		build(m+1, fim, idx*2+1);
+		nodes[idx].value = nodes[idx*2].value + nodes[idx*2+1].value;
+	}
+	ll query(int ini, int fim, int idx=1){
+		prop(idx);
+		if(nodes[idx].fim < ini || nodes[idx].ini > fim) return 0;
+		if(ini <= nodes[idx].ini && nodes[idx].fim <= fim) return nodes[idx].value;
+		return query(ini, fim, 2*idx) + query(ini, fim, 2*idx+1);
+	}
+	void update(int ini, int fim, int v, int idx=1){
+		prop(idx);
+		if(nodes[idx].fim < ini || nodes[idx].ini > fim) return;
+		if(ini <= nodes[idx].ini && nodes[idx].fim <= fim) {
+			nodes[idx].lazy += v;
+			prop(idx);
+			return;
+		}
+		update(ini, fim, v, 2*idx);
+		update(ini, fim, v, 2*idx+1);
+		nodes[idx].value = nodes[idx*2].value + nodes[idx*2+1].value;
+	}
+	void prop(int idx){
+		if(nodes[idx].lazy == 0) return;
+		if(idx*2 < maxn) nodes[idx*2].lazy += nodes[idx].lazy;
+		if(idx*2+1 < maxn) nodes[idx*2+1].lazy += nodes[idx].lazy;
+		nodes[idx].value += nodes[idx].lazy * (nodes[idx].fim - nodes[idx].ini + 1);
+		nodes[idx].lazy = 0;
+	}
+}seg;
+
+
+
+
+
+
+
+
+/*
+// TODO: Limpar implementação
 ll values[maxn];
 ll lazy[maxn];
  
@@ -62,4 +118,4 @@ void SegTree<T>::prop(int idx){
 	if(2*idx+1<maxn) 
 		lazy[idx*2+1] = fun(lazy[2*idx+1], lazy[idx]);
 	lazy[idx] = identity;
-}
+}*/

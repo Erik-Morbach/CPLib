@@ -45,3 +45,4 @@ vi kasai(const string &s, const vi &sa){
 	return lcp;
 }
 
+
