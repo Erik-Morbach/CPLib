@@ -1,0 +1,276 @@
+\chapter{C++}
+
+\section{Compilador}
+
+Para compilar um arquivo \texttt{.cpp} com o compilador \texttt{g++}, usar o comando:
+
+\begin{lstlisting}[language=bash]
+    g++ -std=c++20 -O2 arquivo.cpp
+\end{lstlisting}
+
+\textbf{Obs:} a flag \texttt{-std=c++20} é para usar a versão 20 do C++, os códigos desse Almanaque são testados com essa versão.
+
+Algumas flags úteis para o \texttt{g++} são:
+
+\begin{itemize}
+    \item \texttt{-O2}: Otimizações de compilação
+    \item \texttt{-Wall}: Mostra todos os warnings
+    \item \texttt{-Wextra}: Mostra mais warnings
+    \item \texttt{-Wconversion}: Mostra warnings para conversões implícitas
+    \item \texttt{-fsanitize=address}: Habilita o AddressSanitizer
+    \item \texttt{-fsanitize=undefined}: Habilita o UndefinedBehaviorSanitizer
+\end{itemize}
+
+Todas essas flags já estão presente no script `run` da seção Extra.
+
+\section{STL (Standard Template Library)}
+
+Os templates da STL são estruturas de dados e algoritmos já implementadas em \texttt{C++} que facilitam as implementações, além de serem muito eficients.
+Em geral, todas estão incluídas no cabeçalho \texttt{<bits/stdc++.h>}. As estruturas são templates genéricos, podem ser usadas com qualquer tipo, todos os exemplos a seguir são com \texttt{int} apenas por motivos de simplicidade.
+
+\subsection{Vector}
+
+Um vetor dinâmico (que pode crescer e diminuir de tamanho).
+
+\begin{itemize}
+    \item \texttt{vector<int> v(n, x)}: Cria um vetor de inteiros com \texttt{n} elementos, todos inicializados com x - $\mathcal{O}(n)$
+    \item \texttt{v.push\_back(x)}: Adiciona o elemento \texttt{x} no final do vetor - $\mathcal{O}(1)$
+    \item \texttt{v.pop\_back()}: Remove o último elemento do vetor - $\mathcal{O}(1)$
+    \item \texttt{v.size()}: Retorna o tamanho do vetor - $\mathcal{O}(1)$
+    \item \texttt{v.empty()}: Retorna \texttt{true} se o vetor estiver vazio - $\mathcal{O}(1)$
+    \item \texttt{v.clear()}: Remove todos os elementos do vetor - $\mathcal{O}(n)$
+    \item \texttt{v.front()}: Retorna o primeiro elemento do vetor - $\mathcal{O}(1)$
+    \item \texttt{v.back()}: Retorna o último elemento do vetor - $\mathcal{O}(1)$
+    \item \texttt{v.begin()}: Retorna um iterador para o primeiro elemento do vetor - $\mathcal{O}(1)$
+    \item \texttt{v.end()}: Retorna um iterador para o elemento seguinte ao último do vetor - $\mathcal{O}(1)$
+    \item \texttt{v.insert(it, x)}: Insere o elemento \texttt{x} na posição apontada pelo iterador \texttt{it} - $\mathcal{O}(n)$
+    \item \texttt{v.erase(it)}: Remove o elemento apontado pelo iterador \texttt{it} - $\mathcal{O}(n)$
+    \item \texttt{v.erase(it1, it2)}: Remove os elementos no intervalo \texttt{[it1, it2)} - $\mathcal{O}(n)$
+    \item \texttt{v.resize(n)}: Redimensiona o vetor para \texttt{n} elementos - $\mathcal{O}(n)$
+    \item \texttt{v.resize(n, x)}: Redimensiona o vetor para \texttt{n} elementos, todos inicializados com \texttt{x} - $\mathcal{O}(n)$
+\end{itemize}
+
+\subsection{Pair}
+
+Um par de elementos (de tipos possivelmente diferentes).
+
+\begin{itemize}
+    \item \texttt{pair<int, int> p}: Cria um par de inteiros - $\mathcal{O}(1)$
+    \item \texttt{p.first}: Retorna o primeiro elemento do par - $\mathcal{O}(1)$
+    \item \texttt{p.second}: Retorna o segundo elemento do par - $\mathcal{O}(1)$
+\end{itemize}
+
+\subsection{Set}
+
+Um conjunto de elementos únicos. Por baixo, é uma árvore de busca binária balanceada.
+
+\begin{itemize}
+    \item \texttt{set<int> s}: Cria um conjunto de inteiros - $\mathcal{O}(1)$
+    \item \texttt{s.insert(x)}: Insere o elemento \texttt{x} no conjunto - $\mathcal{O}(\log n)$
+    \item \texttt{s.erase(x)}: Remove o elemento \texttt{x} do conjunto - $\mathcal{O}(\log n)$
+    \item \texttt{s.find(x)}: Retorna um iterador para o elemento \texttt{x} no conjunto, ou \texttt{s.end()} se não existir - $\mathcal{O}(\log n)$
+    \item \texttt{s.size()}: Retorna o tamanho do conjunto - $\mathcal{O}(1)$
+    \item \texttt{s.empty()}: Retorna \texttt{true} se o conjunto estiver vazio - $\mathcal{O}(1)$
+    \item \texttt{s.clear()}: Remove todos os elementos do conjunto - $\mathcal{O}(n)$
+    \item \texttt{s.begin()}: Retorna um iterador para o primeiro elemento do conjunto - $\mathcal{O}(1)$
+    \item \texttt{s.end()}: Retorna um iterador para o elemento seguinte ao último do conjunto - $\mathcal{O}(1)$
+\end{itemize}
+
+\subsection{Multiset}
+
+Basicamente um \texttt{set}, mas permite elementos repetidos. Possui todos os métodos de um \texttt{set}.
+
+Declaração: \texttt{multiset<int> ms}.
+
+Um detalhe é que, ao usar o método \texttt{erase}, ele remove todas as ocorrências do elemento. Para remover apenas uma ocorrência, usar \texttt{ms.erase(ms.find(x))}.
+
+\subsection{Map}
+
+Um conjunto de pares chave-valor, onde as chaves são únicas. Por baixo, é uma árvore de busca binária balanceada.
+
+\begin{itemize}
+    \item \texttt{map<int, int> m}: Cria um mapa de inteiros para inteiros - $\mathcal{O}(1)$
+    \item \texttt{m[key]}: Retorna o valor associado à chave \texttt{key} - $\mathcal{O}(\log n)$
+    \item \texttt{m[key] = value}: Associa o valor \texttt{value} à chave \texttt{key} - $\mathcal{O}(\log n)$
+    \item \texttt{m.erase(key)}: Remove a chave \texttt{key} do mapa - $\mathcal{O}(\log n)$
+    \item \texttt{m.find(key)}: Retorna um iterador para o par chave-valor com chave \texttt{key}, ou \texttt{m.end()} se não existir - $\mathcal{O}(\log n)$
+    \item \texttt{m.size()}: Retorna o tamanho do mapa - $\mathcal{O}(1)$
+    \item \texttt{m.empty()}: Retorna \texttt{true} se o mapa estiver vazio - $\mathcal{O}(1)$
+    \item \texttt{m.clear()}: Remove todos os pares chave-valor do mapa - $\mathcal{O}(n)$
+    \item \texttt{m.begin()}: Retorna um iterador para o primeiro par chave-valor do mapa - $\mathcal{O}(1)$
+    \item \texttt{m.end()}: Retorna um iterador para o par chave-valor seguinte ao último do mapa - $\mathcal{O}(1)$
+\end{itemize}
+
+\subsection{Queue}
+
+Uma fila (primeiro a entrar, primeiro a sair).
+
+\begin{itemize}
+    \item \texttt{queue<int> q}: Cria uma fila de inteiros - $\mathcal{O}(1)$
+    \item \texttt{q.push(x)}: Adiciona o elemento \texttt{x} no final da fila - $\mathcal{O}(1)$
+    \item \texttt{q.pop()}: Remove o primeiro elemento da fila - $\mathcal{O}(1)$
+    \item \texttt{q.front()}: Retorna o primeiro elemento da fila - $\mathcal{O}(1)$
+    \item \texttt{q.size()}: Retorna o tamanho da fila - $\mathcal{O}(1)$
+    \item \texttt{q.empty()}: Retorna \texttt{true} se a fila estiver vazia - $\mathcal{O}(1)$
+\end{itemize}
+
+\subsection{Priority Queue}
+
+Uma fila de prioridade (o maior elemento é o primeiro a sair).
+
+\begin{itemize}
+    \item \texttt{priority\_queue<int> pq}: Cria uma fila de prioridade de inteiros - $\mathcal{O}(1)$
+    \item \texttt{pq.push(x)}: Adiciona o elemento \texttt{x} na fila de prioridade - $\mathcal{O}(\log n)$
+    \item \texttt{pq.pop()}: Remove o maior elemento da fila de prioridade - $\mathcal{O}(\log n)$
+    \item \texttt{pq.top()}: Retorna o maior elemento da fila de prioridade - $\mathcal{O}(1)$
+    \item \texttt{pq.size()}: Retorna o tamanho da fila de prioridade - $\mathcal{O}(1)$
+    \item \texttt{pq.empty()}: Retorna \texttt{true} se a fila de prioridade estiver vazia - $\mathcal{O}(1)$
+\end{itemize}
+
+Para fazer uma fila de prioridade que o menor elemento é o primeiro a sair, usar \texttt{priority\_queue< int, vector<int>, greater<> > pq}.
+
+\subsection{Stack}
+
+Uma pilha (último a entrar, primeiro a sair).
+
+\begin{itemize}
+    \item \texttt{stack<int> s}: Cria uma pilha de inteiros - $\mathcal{O}(1)$
+    \item \texttt{s.push(x)}: Adiciona o elemento \texttt{x} no topo da pilha - $\mathcal{O}(1)$
+    \item \texttt{s.pop()}: Remove o elemento do topo da pilha - $\mathcal{O}(1)$
+    \item \texttt{s.top()}: Retorna o elemento do topo da pilha - $\mathcal{O}(1)$
+    \item \texttt{s.size()}: Retorna o tamanho da pilha - $\mathcal{O}(1)$
+    \item \texttt{s.empty()}: Retorna \texttt{true} se a pilha estiver vazia - $\mathcal{O}(1)$
+\end{itemize}
+
+\subsection{Bitset}
+
+Um conjunto de bits, serve para representar máscaras quando um inteiro não é suficiente. Possui operações bitwise otimizadas pelo processador.
+
+\begin{itemize}
+    \item \texttt{bitset<N> a}: Cria um bitset de tamanho \texttt{N} (\texttt{N} deve ser constante) - $\mathcal{O}(1)$
+    \item \texttt{a[i]}: Retorna o valor do bit na posição \texttt{i} - $\mathcal{O}(1)$
+    \item \texttt{a.count()}: Retorna o número de bits 1 no bitset - $\mathcal{O}(N / w)$
+    \item \texttt{a.size()}: Retorna o tamanho do bitset - $\mathcal{O}(1)$
+    \item \texttt{a.set(i)}: Seta o bit na posição \texttt{i} para 1 - $\mathcal{O}(1)$
+    \item \texttt{a.set()}: Seta todos os bits para 1 - $\mathcal{O}(N / w)$
+    \item \texttt{a.reset(i)}: Seta o bit na posição \texttt{i} para 0 - $\mathcal{O}(1)$
+    \item \texttt{a.reset()}: Seta todos os bits para 0 - $\mathcal{O}(N / w)$
+    \item \texttt{a.flip(i)}: Inverte o bit na posição \texttt{i} - $\mathcal{O}(1)$
+    \item \texttt{a.flip()}: Inverte todos os bits - $\mathcal{O}(N / w)$
+    \item \texttt{a.to\_ullong()}: Retorna o valor do bitset como um inteiro - $\mathcal{O}(N / w)$
+\end{itemize}
+
+O bitset também suporta operações como \verb|&|, \verb/|/, \verb|^|, \verb|~|, \verb|<<|, \verb|>>|, entre outros.
+
+OBS: $w$ é o tamanho da palavra do processador, em geral 32 ou 64 bits.
+
+\subsection{Funções úteis}
+
+\begin{itemize}
+    \item \texttt{min(a, b)}: Retorna o menor entre \texttt{a} e \texttt{b} - $\mathcal{O}(1)$
+    \item \texttt{max(a, b)}: Retorna o maior entre \texttt{a} e \texttt{b} - $\mathcal{O}(1)$
+    \item \texttt{abs(a)}: Retorna o valor absoluto de \texttt{a} - $\mathcal{O}(1)$
+    \item \texttt{swap(a, b)}: Troca os valores de \texttt{a} e \texttt{b} - $\mathcal{O}(1)$
+    \item \texttt{sqrt(a)}: Retorna a raiz quadrada de \texttt{a} - $\mathcal{O}(\log a)$
+    \item \texttt{ceil(a)}: Retorna o menor inteiro maior ou igual a \texttt{a} - $\mathcal{O}(1)$
+    \item \texttt{floor(a)}: Retorna o maior inteiro menor ou igual a \texttt{a} - $\mathcal{O}(1)$
+    \item \texttt{round(a)}: Retorna o inteiro mais próximo de \texttt{a} - $\mathcal{O}(1)$
+\end{itemize}
+
+\subsection{Funções úteis para vetores}
+
+Para usar em \texttt{std::vector}, sempre passar \texttt{v.begin()} e \texttt{v.end()} como argumentos pra essas funções.
+
+Se for um vetor estilo \texttt{C}, usar \texttt{v} e \texttt{v + n}. 
+Exemplo:
+\begin{lstlisting}[language=C++]
+    int v[10];
+    sort(v, v + 10);
+\end{lstlisting}
+
+\textbf{Lembrete:} \texttt{v.end()} é um iterador para o elemento seguinte ao último do vetor, então não é um iterador válido.
+
+As funções de vetor em geral são da forma \texttt{[L, R)}, ou seja, \texttt{L} é incluso e \texttt{R} é excluso.
+
+\begin{itemize}
+    \item \texttt{fill(v.begin(), v.end(), x)}: Preenche o vetor \texttt{v} com o valor \texttt{x} - $\mathcal{O}(n)$
+    \item \texttt{sort(v.begin(), v.end())}: Ordena o vetor \texttt{v} - $\mathcal{O}(n \log n)$
+    \item \texttt{reverse(v.begin(), v.end())}: Inverte o vetor \texttt{v} - $\mathcal{O}(n)$
+    \item \texttt{accumulate(v.begin(), v.end(), 0)}: Soma todos os elementos do vetor \texttt{v} - $\mathcal{O}(n)$
+    \item \texttt{max\_element(v.begin(), v.end())}: Retorna um iterador para o maior elemento do vetor \texttt{v} - $\mathcal{O}(n)$
+    \item \texttt{min\_element(v.begin(), v.end())}: Retorna um iterador para o menor elemento do vetor \texttt{v} - $\mathcal{O}(n)$
+    \item \texttt{count(v.begin(), v.end(), x)}: Retorna o número de ocorrências do elemento \texttt{x} no vetor \texttt{v} - $\mathcal{O}(n)$
+    \item \texttt{find(v.begin(), v.end(), x)}: Retorna um iterador para a primeira ocorrência do elemento \texttt{x} no vetor \texttt{v}, ou \texttt{v.end()} se não existir - $\mathcal{O}(n)$
+    I\item \texttt{lower\_bound(v.begin(), v.end(), x)}: Retorna um iterador para o primeiro elemento maior ou igual a \texttt{x} no vetor \texttt{v} (o vetor deve estar ordenado) - $\mathcal{O}(\log n)$
+    \item \texttt{upper\_bound(v.begin(), v.end(), x)}: Retorna um iterador para o primeiro elemento estritamente maior que \texttt{x} no vetor \texttt{v} (o vetor deve estar ordenado) - $\mathcal{O}(\log n)$
+    \item \texttt{next\_permutation(a.begin(), a.end())}: Rearranja os elementos do vetor \texttt{a} para a próxima permutação lexicograficamente maior - $\mathcal{O}(n)$
+\end{itemize}
+
+\section{Pragmas}
+
+Os pragmas são diretivas para o compilador, que podem ser usadas para otimizar o código.
+
+Temos os pragmas de otimização, como por exemplo:
+
+\begin{itemize}
+    \item \texttt{\#pragma GCC optimize("O2")}: Otimizações de nível 2 (padrão de competições)
+    \item \texttt{\#pragma GCC optimize("O3")}: Otimizações de nível 3 (seguro para usar)
+    \item \texttt{\#pragma GCC optimize("Ofast")}: Otimizações agressivas (perigoso!)
+    \item \texttt{\#pragma GCC optimize("unroll-loops")}: Otimiza os loops mas pode levar a cache misses
+\end{itemize}
+
+E também os pragmas de target, que são usados para otimizar o código para um certo processador:
+
+\begin{itemize}
+    \item \texttt{\#pragma GCC target("avx2")}: Otimiza instruções para processadores com suporte a AVX2
+    \item \texttt{\#pragma GCC target("sse4")}: Parecido com o de cima, mas mais antigo
+    \item \texttt{\#pragma GCC target("popcnt")}: Otimiza o popcount em processadores que suportam
+    \item \texttt{\#pragma GCC target("lzcnt")}: Otimiza o leading zero count em processadores que suportam
+    \item \texttt{\#pragma GCC target("bmi")}: Otimiza instruções de bit manipulation em processadores que suportam
+    \item \texttt{\#pragma GCC target("bmi2")}: Mesmo que o de cima, mas mais recente
+\end{itemize}
+
+Em geral, esses pragmas são usados para otimizar o código em competições, mas é importante usálos com certa sabedoria, em alguns casos eles podem piorar o desempenho do código.
+
+Uma opção relativamente segura de se usar é a seguinte:
+
+\begin{lstlisting}[language=C++]
+    #pragma GCC optimize("O3,unroll-loops")
+    #pragma GCC target("avx2,bmi,bmi2,lzcnt,popcnt")
+\end{lstlisting}
+
+\section{Constantes em C++}
+
+\begin{center}
+\begin{tabular}{|c|c|c|}
+  \hline
+  Constante & Nome em \texttt{C++} & Valor \\
+  \hline
+  $\pi$ & \texttt{M\_PI} & 3.141592... \\
+  \hline
+  $\pi / 2$ & \texttt{M\_PI\_2} & 1.570796... \\
+  \hline
+  $\pi / 4$ & \texttt{M\_PI\_4} & 0.785398... \\
+  \hline
+  $1 / \pi$ & \texttt{M\_1\_PI} & 0.318309... \\
+  \hline
+  $2 / \pi$ & \texttt{M\_2\_PI} & 0.636619... \\
+  \hline
+  $2 / \sqrt{\pi}$ & \texttt{M\_2\_SQRTPI} & 1.128379... \\
+  \hline
+  $\sqrt{2}$ & \texttt{M\_SQRT2} & 1.414213... \\
+  \hline
+  $1 / \sqrt{2}$ & \texttt{M\_SQRT1\_2} & 0.707106... \\
+  \hline
+  $e$ & \texttt{M\_E} & 2.718281... \\
+  \hline
+  $\log_2{e}$ & \texttt{M\_LOG2E} & 1.442695... \\
+  \hline
+  $\log_{10}{e}$ & \texttt{M\_LOG10E} & 0.434294... \\
+  \hline
+  $\ln{2}$ & \texttt{M\_LN2} & 0.693147... \\
+  \hline
+  $\ln{10}$ & \texttt{M\_LN10} & 2.302585... \\
+  \hline
+\end{tabular}
+\end{center}

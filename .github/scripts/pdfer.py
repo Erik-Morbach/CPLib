@@ -311,18 +311,5 @@ if __name__ == "__main__":
         if Path("LaTeX/Biblioteca.rubbercache").exists():
             os.remove("LaTeX/Biblioteca.rubbercache")
 
-
-    README = Path("README.md")
-    with open(README, "w") as f:
-        printa_arquivo(Path("LaTeX/INICIO_README.md"), f)
-        f.write("## Tabela de Conteúdos\n\n")
-        for child in DIR.iterdir():
-            if child.is_dir():
-                dfs_readmes(child, f, 0, "Codigo/" + child.name)
-        print("")
-        f.write("\n\n")
-
-    print("")
-
 else:
     print("Esse script não deve ser importado, apenas executado.")

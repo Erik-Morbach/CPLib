@@ -1,0 +1,358 @@
+\chapter{Teórico}
+
+
+\section {Definições}
+
+Algumas definições e termos importantes:
+
+\section{Números primos}
+
+Números primos são muito úteis para funções de hashing (dentre outras coisas). Aqui vão vários números primos interessantes:
+
+
+\subsection{Primos com truncamento à esquerda}
+
+Números primos tais que qualquer sufixo deles é um número primo:
+
+\begin{center}
+\LARGE
+33,333,31 \\
+\LARGE
+357,686,312,646,216,567,629,137
+\end{center}
+
+
+\subsection{Primos gêmeos (Twin Primes)}
+
+Pares de primos da forma $(p, p + 2)$ (aqui tem só alguns pares aleatórios, existem muitos outros).
+
+\begin{table}[h]
+  \centering
+  \begin{tabular}{|c|c|c|}
+    \hline
+    \textbf{Primo} & \textbf{Primo + 2} & \textbf{Ordem} \\
+    \hline
+    5 & 7 & $10^0$ \\
+    \hline
+    17 & 19 & $10^1$ \\
+    \hline
+    461 & 463 & $10^2$ \\
+    \hline
+    3461 & 3463 & $10^3$ \\
+    \hline
+    34499 & 34501 & $10^4$ \\
+    \hline
+    487829 & 487831 & $10^5$ \\
+    \hline
+    5111999 & 5112001 & $10^6$ \\
+    \hline
+    30684887 & 30684889 & $10^7$ \\
+    \hline
+    361290539 & 361290541 & $10^8$ \\
+    \hline
+    1000000007 & 1000000009 & $10^9$ \\
+    \hline
+    1005599459 & 1005599461 & $10^9$ \\
+    \hline
+  \end{tabular}
+\end{table}
+
+
+\subsection{Números primos de Mersenne}
+
+São os números primos da forma $2^m - 1$, onde $m$ é um número inteiro positivo.
+
+\begin{table}[h]
+  \centering
+  \begin{tabular}{|c|c|}
+    \hline
+    \textbf{Expoente ($m$)} & \textbf{Representação Decimal} \\
+    \hline
+    \(2\) & 3 \\
+    \hline
+    \(3\) & 7 \\
+    \hline
+    \(5\) & 31 \\
+    \hline
+    \(7\) & 127 \\
+    \hline
+    \(13\) & 8,191 \\
+    \hline
+    \(17\) & 131,071 \\
+    \hline
+    \(19\) & 524,287 \\
+    \hline
+    \(31\) & 2,147,483,647 \\
+    \hline
+    \(61\) & $2,3 * 10^{18}$ \\
+    \hline
+    \(89\) & $6,1 * 10^{26}$ \\
+    \hline
+    \(107\) & $1,6 * 10^{32}$ \\
+    \hline
+    \(127\) & $1,7 * 10^{38}$ \\
+    \hline
+  \end{tabular}
+\end{table}
+
+
+\section{Operadores lineares}
+
+
+\subsection{Rotação no sentido anti-horário por $\theta ^\circ$}
+
+\begin{equation*} 
+\large
+\begin{bmatrix}
+    \cos \theta & -\sin \theta \\
+    \sin \theta & \cos \theta
+\end{bmatrix}
+\end{equation*}
+
+
+\subsection{Reflexão em relação à reta $y = mx$ }
+
+\begin{equation*}
+\large
+\frac{1}{m^2+1} 
+\begin{bmatrix}
+    1 - m^2 & 2m \\
+    2m & m^2 - 1
+\end{bmatrix}
+\end{equation*} 
+
+
+\subsection{Inversa de uma matriz 2x2 A}
+
+\begin{equation*} 
+\large 
+\begin{bmatrix}
+    a & b \\
+    c & d
+\end{bmatrix}^{-1} =
+\frac{1}{\text{det}(A)}
+\begin{bmatrix}
+    d & -b \\
+    -c & a
+\end{bmatrix}
+\end{equation*}
+
+
+\subsection{Cisalhamento horizontal por K}
+
+\begin{equation*} 
+\large
+\begin{bmatrix}
+    1 & K \\
+    0 & 1
+\end{bmatrix}
+\end{equation*}
+
+
+\subsection{Cisalhamento vertical por K}
+
+\begin{equation*} 
+\large
+\begin{bmatrix}
+    1 & 0 \\
+    K & 1
+\end{bmatrix}
+\end{equation*}
+
+
+\subsection{Mudança de base}
+
+{\large $\vec{a}_\beta$ são as coordenadas do vetor $\vec{a}$ na base $\beta$.\\}
+{\large $\vec{a}$ são as coordenadas do vetor $\vec{a}$ na base canônica.\\}
+{\large $\vec{b1}$ e $\vec{b2}$ são os vetores de base para $\beta$.\\}
+{\large $C$ é uma matriz que muda da base $\beta$ para a base canônica.}
+
+\begin{equation*}
+\large C \vec{a}_\beta = \vec{a}
+\end{equation*} 
+\begin{equation*}
+\large C^{-1} \vec{a} = \vec{a}_\beta
+\end{equation*} 
+\begin{equation*} 
+\large
+C = 
+\begin{bmatrix}
+    b1_x & b2_x \\
+    b1_y & b2_y
+\end{bmatrix}
+\end{equation*}
+
+
+\subsection{Propriedades das operações de matriz}
+
+\begin{equation*} 
+\large (AB)^{-1} = A^{-1}B^{-1}\\
+\end{equation*}
+\begin{equation*} 
+\large (AB)^{T} = B^{T}A^{T} \\
+\end{equation*}
+\begin{equation*} 
+\large (A^{-1})^{T} = (A^{T})^{-1} \\
+\end{equation*}
+\begin{equation*} 
+\large (A+B)^{T} = A^{T} + B^{T} \\
+\end{equation*}
+\begin{equation*} 
+\large \text{det}(A) = \text{det}(A^{T}) \\
+\end{equation*}
+\begin{equation*} 
+\large \text{det}(AB) = \text{det}(A)\text{det}(B) \\
+\end{equation*}
+{\large Seja $A$ uma matriz NxN:}
+\begin{equation*} 
+\large \text{det}(kA) = K^N\text{det}(A) \\
+\end{equation*}
+
+\section{Sequências numéricas}
+
+\subsection{Sequência de Fibonacci}
+
+Primeiros termos: \textbf{1, 1, 2, 3, 5, 8, 13, 21, 34, \ldots}
+
+Definição:
+
+\begin{equation*}
+\large
+F_0 = F_1 = 1
+\end{equation*}
+
+\begin{equation*}
+\large
+F_n = F_{n-1} + F_{n-2}
+\end{equation*}
+
+Matriz de recorrência:
+
+\begin{equation*}
+\large
+\begin{bmatrix}
+    0 & 1 \\
+    1 & 1
+\end{bmatrix}
+\begin{bmatrix}
+    F_{n-2} \\
+    F_{n-1}
+\end{bmatrix}
+=
+\begin{bmatrix}
+    F_{n-1} \\
+    F_n
+\end{bmatrix}
+\end{equation*}
+
+\subsection{Sequência de Catalan}
+
+Primeiros termos: \textbf{1, 1, 2, 5, 14, 42, 132, 429, 1430, \ldots}
+
+Definição:
+
+\begin{equation*}
+\large
+C_0 = C_1 = 1
+\end{equation*}
+
+\begin{equation*}
+\large
+C_n = \sum_{i=0}^{n-1} C_i \cdot C_{n-1-i}
+\end{equation*}
+
+Definição analítica:
+
+\begin{equation*}
+\large
+C_n = \frac{1}{n+1} \binom{2n}{n}
+\end{equation*}
+
+Propriedades úteis:
+
+\begin{itemize}
+  \item $C_n$ é o número de árvores binárias com $n+1$ folhas.
+  \item $C_n$ é o número de sequências de parênteses bem formadas com $n$ pares de parênteses.
+\end{itemize}
+
+\section{Análise combinatória}
+
+\subsection{Fatorial}
+
+O fatorial de um número $n$ é o produto de todos os inteiros positivos menores ou iguais a $n$.
+
+O fatorial conta o número de permutações de $n$ elementos.
+
+\begin{equation*}
+\large
+n! = n \cdot (n-1)!
+\end{equation*}
+
+Em particular, $0! = 1$.
+
+\subsection{Combinação}
+
+Conta o número de maneiras de escolher $k$ elementos de um conjunto de $n$ elementos.
+
+\begin{equation*}
+\large
+\binom{n}{k} = \frac{n!}{k! \cdot (n-k)!}
+\end{equation*}
+
+\subsection{Arranjo}
+
+Conta o número de maneiras de escolher $k$ elementos de um conjunto de $n$ elementos, onde a ordem importa.
+
+\begin{equation*}
+\large
+P(n, k) = \frac{n!}{(n-k)!}
+\end{equation*}
+
+\subsection{Estrelas e barras}
+
+Conta o número de maneiras de distribuir $n$ elementos idênticos em $k$ recipientes distintos.
+
+\begin{equation*}
+\large
+\binom{n+k-1}{k-1}
+\end{equation*}
+
+\subsection{Princípio da inclusão-exclusão}
+
+O princípio da inclusão-exclusão é uma técnica para contar o número de elementos em uma união de conjuntos.
+
+\begin{equation*}
+\large
+\left| \bigcup_{i=1}^{n} A_i \right| = \sum_{k=1}^{n} (-1)^{k+1} \left( \sum_{1 \leq i_1 < i_2 < \ldots < i_k \leq n} \left| A_{i_1} \cap A_{i_2} \cap \ldots \cap A_{i_k} \right| \right)
+\end{equation*}
+
+\subsection{Princípio da casa dos pombos}
+
+Se $n$ pombos são colocados em $m$ casas, então pelo menos uma casa terá $\lceil \frac{n}{m} \rceil$ pombos ou mais.
+
+\section{Teoria dos números}
+
+\subsection{Pequeno teorema de Fermat}
+
+Se $p$ é um número primo e $a$ é um inteiro não divisível por $p$, então $a^{p-1} \equiv 1 \pmod{p}$.
+
+\subsection{Teorema de Euler}
+
+Se $m$ e $a$ são inteiros positivos coprimos, então $a^{\phi(m)} \equiv 1 \pmod{m}$, onde $\phi(m)$ é a função totiente de Euler.
+
+\subsection{Aritmética modular}
+
+Quando estamos trabalhando com aritmética módulo um número $p$, todos os valores existentes estão entre $[0, p-1]$. 
+
+Algumas propriedades e equivalências úteis para usar aritmética modular em código são:
+
+\begin{itemize}
+  \item $(a + b) \mod p \equiv ((a \mod p) + (b \mod p)) \mod p$
+  \item $(a - b) \mod p \equiv ((a \mod p) - (b \mod p)) \mod p$
+  \begin{itemize}
+    \item Note que o resultado pode ser negativo, nesse é necessário adicionar $p$ ao resultado. De forma geral, geralmente fazemos $(a - b + p) \mod p$ (assumindo que $a$ e $b$ já estão no intervalo $[0, p-1]$).
+  \end{itemize}
+  \item $(a \cdot b) \mod p \equiv ((a \mod p) \cdot (b \mod p)) \mod p$
+  \item $a^b \mod p \equiv ((a \mod p)^b) \mod p$
+  \item $a^b \mod p \equiv ((a \mod p)^{(b \mod \phi(p))}) \mod p$ se $a$ e $p$ são coprimos
+\end{itemize}
